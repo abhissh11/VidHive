@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./../components/Header";
+import Sidebar from "@/components/Sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "VidHive - Video Streaming Platform",
-  description: "watch and stream your videos on VidHive for free",
+  description: "Watch and stream your videos on VidHive for free",
 };
 
 export default function RootLayout({
@@ -28,10 +29,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <>
-          <Header />
-          {children}
-        </>
+        {/* Header Fixed at the Top */}
+        <Header />
+
+        <div className="flex">
+          {/* Sidebar below the Header */}
+          <div className=" min-h-screen bg-gray-900 text-white">
+            <Sidebar />
+          </div>
+
+          {/* Main Content Area */}
+          <div className="flex-1 px-24 py-4">{children}</div>
+        </div>
       </body>
     </html>
   );
