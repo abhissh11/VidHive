@@ -39,7 +39,7 @@ export default function RootLayout({
           </div>
 
           {/* Main Content Area */}
-          <div className="flex-1 px-24 py-4">{children}</div>
+          <div className="flex-1 sm:pl-20 pl-14 sm:pr-4 py-4">{children}</div>
         </div>
       </body>
     </html>
