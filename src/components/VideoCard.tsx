@@ -7,7 +7,7 @@ export default function VideoCard() {
     <div className="w-full flex flex-col shadow-xs rounded-lg group cursor-pointer">
       <div className="w-full">
         <img
-          src="https://cdn.neowin.com/news/images/uploaded/2024/08/1723555868_youtube-logo.jpg"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSz6-T5QSkQKloNOr6nj5zr5Q7am1lgqnPtw&s"
           alt="video-card"
           className="rounded-lg group-hover:rounded-xs hover:-translate-y-1 transition-all duration-100"
         />
