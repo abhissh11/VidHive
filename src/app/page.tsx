@@ -9,12 +9,12 @@ export default function Home() {
   const videos = Array.from({ length: 10 }, (_, index) => ({ id: index }));
 
   return (
-    <div className="w-full">
-      <div className="w-full flex flex-wrap gap-4 justify-center items-start p-4">
+    <div className="w-full flex justify-center items-center px-6">
+      <div className="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-2">
         {videos.map((vid) => (
           <div
             key={vid.id}
-            className="w-1/5 min-w-[260px] cursor-pointer"
+            className="min-w-[200px] cursor-pointer"
             onClick={() => router.push(`/watch/${vid.id}`)}
           >
             <VideoCard />

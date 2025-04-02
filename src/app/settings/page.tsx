@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import Image from "next/image";
 import { CornerRightDown } from "lucide-react";
-import { signOut } from "next-auth/react";
 import SignOutButton from "@/components/SignOutButton";
 
 export default async function Settings() {
@@ -18,7 +17,7 @@ export default async function Settings() {
       <div className="w-full flex flex-col gap-6">
         {session && (
           <>
-            <div className="w-full  flex items-center gap-20">
+            <div className="w-full sm:flex sm:justify-start items-center gap-20">
               <div className="flex gap-2 ">
                 <Image
                   src={`${session.user?.image}`}
@@ -28,7 +27,9 @@ export default async function Settings() {
                   className="rounded-full p-2"
                 />
                 <div className="flex flex-col justify-center gap-1 items-start">
-                  <h4 className="text-xl font-bold">{session.user?.name}</h4>
+                  <h4 className="text-lg md:text-xl font-bold">
+                    {session.user?.name}
+                  </h4>
                   <p className="text-sm text-neutral-400 font-light">
                     {session.user?.email}
                   </p>
