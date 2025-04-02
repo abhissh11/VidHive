@@ -4,6 +4,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import Image from "next/image";
 import { CornerRightDown } from "lucide-react";
 import SignOutButton from "@/components/SignOutButton";
+import Videos from "@/components/Videos";
 
 export default async function Settings() {
   const session = await getServerSession(authOptions);
@@ -39,13 +40,14 @@ export default async function Settings() {
             </div>
           </>
         )}
-        <div className="px-4">
+        <div className="px-4 flex flex-col">
           <h4 className="text-2xl font-bold flex gap-1">
             Your Videos{" "}
             <span className="pt-2 bg-purple-800 p-2 rounded-md font-bold">
               <CornerRightDown />
             </span>{" "}
           </h4>
+          <Videos />
         </div>
       </div>
     </div>
