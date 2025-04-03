@@ -1,13 +1,12 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import Image from "next/image";
 import { CornerRightDown } from "lucide-react";
 import SignOutButton from "@/components/SignOutButton";
 import Videos from "@/components/Videos";
 
 export default async function Settings() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   if (!session) {
     redirect("/signin");
@@ -19,7 +18,7 @@ export default async function Settings() {
         {session && (
           <>
             <div className="w-full sm:flex sm:justify-start items-center gap-20">
-              <div className="flex gap-2 ">
+              <div className="flex gap-2">
                 <Image
                   src={`${session.user?.image}`}
                   width={80}
