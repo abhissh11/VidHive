@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
 import dotenv from "dotenv";
-dotenv.config();
 
+dotenv.config();
 
 const MONGODB_URI = process.env.MONGODB_URI as string;
 
@@ -17,7 +17,7 @@ export const connectDB = async () => {
             dbName: "nextauth_db",
             useNewUrlParser: true,
             useUnifiedTopology: true,
-        } as any);
+        } as ConnectOptions); // Use the correct type instead of 'any'
 
         console.log("✅ Connected to MongoDB");
     } catch (error) {

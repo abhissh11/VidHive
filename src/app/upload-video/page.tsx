@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-export default function page() {
+export default function Page() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [video, setVideo] = useState<File | null>(null);
