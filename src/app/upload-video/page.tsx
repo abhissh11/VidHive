@@ -17,22 +17,29 @@ export default function Page() {
     setLoading(true);
     setMessage("");
 
-    //convert video to base64
-    const reader = new FileReader();
-    reader.readAsDataURL(video);
-    reader.onload = async () => {
-      const videoBase64 = reader.result as string;
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("videoFile", video);
 
+    try {
       const response = await fetch("/api/upload", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, description, videoFile: videoBase64 }),
+        body: formData, // Sending FormData directly
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload video.");
+      }
 
       const data = await response.json();
       setLoading(false);
-      setMessage(data.message || data.error);
-    };
+      setMessage(data.message || "Upload successful!");
+    } catch (error) {
+      console.error("Upload failed:", error);
+      setLoading(false);
+      setMessage("Upload failed.");
+    }
   };
 
   return (
@@ -57,7 +64,7 @@ export default function Page() {
         type="file"
         accept="video/*"
         onChange={(e) => setVideo(e.target.files?.[0] || null)}
-        className="mt-2 bg-blue-600 text-sm cursor-pointer p-1 px-2 rounded "
+        className="mt-2 bg-blue-600 text-sm cursor-pointer p-1 px-2 rounded"
       />
 
       <button

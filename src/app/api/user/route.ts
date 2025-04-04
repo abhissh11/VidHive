@@ -12,7 +12,9 @@ export async function GET(req: NextRequest) {
     if (!userId) {
         return NextResponse.json({ error: "User ID is required" }, { status: 400 });
     }
-
+    if (userId.length !== 24) {
+        return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
+    }
     try {
         const user = await User.findById(userId);
         if (!user) {

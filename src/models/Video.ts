@@ -4,6 +4,7 @@ export interface IVedio extends Document {
     title: string,
     description: string,
     videoUrl: string,
+    thumbnailUrl: string,
     publicId: string,   // Cloudinary public ID for deletion
     uploadedBy: mongoose.Schema.Types.ObjectId;
 }
@@ -13,6 +14,7 @@ const videoSchema = new Schema<IVedio>(
         title: { type: String, required: true },
         description: { type: String },
         videoUrl: { type: String, required: true },
+        thumbnailUrl: { type: String, required: true },
         publicId: { type: String, required: true },
         uploadedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
 

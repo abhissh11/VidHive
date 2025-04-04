@@ -6,7 +6,7 @@ export async function GET() {
     await connectDB();
 
     try {
-        const videos = await Video.find().sort({ createdAt: -1 }); // Fetch all videos sorted by latest
+        const videos = await Video.find().populate("uploadedBy", "_id name image").lean().sort({ createdAt: -1 }); // Fetch all videos sorted by latest
 
         return NextResponse.json({ videos }, { status: 200 });
     } catch (error) {
