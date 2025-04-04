@@ -17,7 +17,7 @@ export default function Signin() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl font-bold">Welcome to NextAuth App</h1>
+      <h1 className="text-4xl font-bold">Welcome to VidHive </h1>
       {session ? (
         <>
           <p className="mt-4">Signed in as {session.user?.name}</p>

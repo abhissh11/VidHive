@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import VideoCard from "@/components/VideoCard";
+import HomeSkeleton from "@/components/HomeSkeleton";
 
 interface Video {
   _id: string;
@@ -40,7 +41,7 @@ export default function Home() {
     fetchVideos();
   }, []);
 
-  if (loading) return <p className="text-white">Loading videos...</p>;
+  if (loading) return <HomeSkeleton />;
   if (error) return <p className="text-red-500">{error}</p>;
   if (videos.length === 0)
     return <p className="text-gray-400">No videos uploaded yet.</p>;

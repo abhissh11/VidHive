@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Bookmark, ThumbsUp, User } from "lucide-react";
 
-import SuggestedVideos from "@/components/SuggestedVideos"; // Import SuggestedVideos
+import SuggestedVideos from "@/components/SuggestedVideos";
 import Image from "next/image";
+import WatchSkeleton from "@/components/WatchSkeleton";
 
 interface Video {
   _id: string;
@@ -45,10 +46,10 @@ export default function WatchVideo() {
     fetchVideo();
   }, [videoId]);
 
-  if (!video) return <p>Loading...</p>;
+  if (!video) return <WatchSkeleton />;
 
   return (
-    <div className="w-full max-w-6xl mx-auto mt-2 flex flex-col md:flex-row gap-6">
+    <div className="px-4 w-full max-w-6xl mx-auto mt-4 flex flex-col md:flex-row gap-6">
       {/* Video Player - Left */}
       <div className="w-full md:w-2/3">
         <video controls src={video.videoUrl} className="w-full rounded-lg" />
