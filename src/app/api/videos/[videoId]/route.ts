@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import { Video } from "@/models/Video";
 
-export async function GET(req: NextRequest, { params }: { params: { videoId: string } }) {
+export async function GET(req: NextRequest, context: { params: Promise<{ videoId: string }> }) {
     await connectDB();
 
     try {
-        const videoId = params.videoId;
+        const { videoId } = await context.params;
 
         if (!videoId) {
             return NextResponse.json({ error: "Video ID is required" }, { status: 400 });
