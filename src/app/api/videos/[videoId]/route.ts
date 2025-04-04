@@ -1,30 +1,22 @@
+import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import { Video } from "@/models/Video";
-import { NextResponse } from "next/server";
 
-interface Context {
-    params: {
-        videoId: string;
-    };
-}
-
-export async function GET(request: Request, context: Context) {
+export async function GET(req: NextRequest, context: { params: { videoId: string } }) {
     await connectDB();
 
     try {
-        const videoId = context.params.videoId;
+        const { videoId } = await context.params;
 
         if (!videoId) {
-            return NextResponse.json(
-                { error: "Video ID is required" },
-                { status: 400 }
-            );
+            return NextResponse.json({ error: "Video ID is required" }, { status: 400 });
         }
 
-        const video = await Video.findById(videoId).populate(
-            "uploadedBy",
-            "_id name image"
-        );
+        if (videoId.length !== 24) {
+            return NextResponse.json({ error: "Invalid Video ID" }, { status: 400 });
+        }
+
+        const video = await Video.findById(videoId).populate("uploadedBy", "_id name image");
 
         if (!video) {
             return NextResponse.json({ error: "Video not found" }, { status: 404 });
@@ -33,9 +25,6 @@ export async function GET(request: Request, context: Context) {
         return NextResponse.json({ video }, { status: 200 });
     } catch (error) {
         console.error("Error fetching video:", error);
-        return NextResponse.json(
-            { error: "Failed to fetch video" },
-            { status: 500 }
-        );
+        return NextResponse.json({ error: "Failed to fetch video" }, { status: 500 });
     }
 }
