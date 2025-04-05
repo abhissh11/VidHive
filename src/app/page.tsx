@@ -27,7 +27,7 @@ export default function Home() {
       try {
         const res = await fetch("/api/videos");
         if (!res.ok) {
-          throw new Error("Failed to fetch videos");
+          throw new Error("Failed to fetch videos, Kindly Refresh!");
         }
         const data = await res.json();
         setVideos(data.videos || []);
